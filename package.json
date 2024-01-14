@@ -1,0 +1,15 @@
+{
+  "name": "mlog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "watch": "nodemon --watch ./src/mapScaler.ts ./scripts/watcher.js",
+    "dev": "mlogjs ./src/mapScaler.ts out.mlog"
+  },
+  "author": "Sharlottes",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.10.8"
+  }
+}

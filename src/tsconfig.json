@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "moduleDetection": "force",
+    "noLib": true,
+    "types": []
+  },
+  "extends": "../tsconfig.json",
+  "include": ["../lib", "*.js", "*.ts"],
+  "exclude": ["../node_modules"]
+}
