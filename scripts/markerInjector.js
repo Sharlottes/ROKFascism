@@ -1036,4 +1036,5 @@ for (var l of loc) {
   );
   marker.fontSize = 1.5;
   objective.markers = Structs.add(objective.markers, marker);
+  objective.details = "for city";
 }

@@ -1,4 +1,4 @@
-import { spawnUnit, setProp, setBlock, flushMessage, fetch } from "mlogjs:world";
+import { spawnUnit, setProp, setBlock, fetch, flushMessage, setRule } from "mlogjs:world";
 
 function angleDeg(x1: number, y1: number, x2: number, y2: number) {
   const dx = x2 - x1;
@@ -24,45 +24,91 @@ function fire(fromX: number, fromY: number, toX: number, toY: number) {
   unitBind(mega);
   unitControl.payDrop();
 
+  const lastTime = Vars.time;
   while (true) {
-    const missile = unitRadar({ filters: ["ally", "any", "any"], order: true, sort: "distance" });
-    if (missile) {
-      setProp(missile).speed = 10000;
-      setProp(missile).x = fromX;
-      setProp(missile).y = fromY;
-      setProp(missile).rotation = deg;
-      unitBind(missile);
-      unitControl.approach({ x: toX, y: toY, radius: 1 });
+    if (Vars.time - lastTime >= 10 * 1000) {
       setProp(mega).health = 0;
-      break;
+      return;
     }
+    const missile = unitRadar({ filters: ["ally", "any", "any"], order: true, sort: "distance" });
+    if (!missile) continue;
+    if (missile.flag == 1) continue;
+
+    unitControl.flag(1);
+    setProp(mega).health = 0;
+    const dist = Math.sqrt(Math.pow(fromX - toX, 2) + Math.pow(fromY - toY, 2));
+    if ((dist * 8) / (60 * 4) <= 4.6 * 60 * 5.5) setProp(missile).speed = (dist * 8) / (60 * 4);
+    setProp(missile).rotation = angleDeg(missile.x, missile.y, toX, toY);
+    unitBind(missile);
+    unitControl.move(toX, toY);
+    break;
   }
 }
 
-const koreaCores = new MutableArray([
-  495, 517, 475.5, 508.5, 598.5, 398.5, 519.5, 430.5, 477.5, 351.5, 637.5, 356.5, 648.5, 378.5, 511, 447, 494.5, 495.5,
-  527.5, 459.5, 470.5, 447.5, 508.5, 397.5, 464.5, 342.5, 611.5, 447.5, 603.5, 354.5, 544.5, 539.5, 459.5, 235.5,
-]);
 function missileRaid() {
   const originX = 467;
   const originY = 541;
-  for (let i = 0; i < koreaCores.size; i += 2) {
-    const x = koreaCores[i];
-    const y = koreaCores[i + 1];
-    const dist = Math.len(originY - y, originX - x);
-    if (dist >= 168) continue;
-    fire(originX, originY, x, y);
+
+  const coreAmount = fetch.coreCount(Teams.sharded);
+  for (let i = 0; i < 15; i++) {
+    const core = fetch.core(Teams.sharded, i % coreAmount);
+    fire(originX, originY, core.x, core.y);
     wait(0.25);
   }
-  wait(5);
+}
+
+let lastTime = Vars.time;
+const ATTACK_DELAY = 3 * 60 * 1000;
+function printLastTime(now: number, lastTime: number) {
+  const ms = ATTACK_DELAY - (now - lastTime);
+  const second = (ms / 1000) % 60;
+  const minute = (ms / (1000 * 60)) % 60;
+  print`다음 미사일 공습: [accent]${Math.floor(minute)}분 ${Math.floor(second * 10) / 10}초[]`;
+  flushMessage.mission();
+  printFlush();
+}
+
+function intro() {
+  for (let i = 0; i < 3; i++) {
+    print`임무 출력중.`;
+    flushMessage.mission();
+    wait(1);
+    print`임무 출력중..`;
+    flushMessage.mission();
+    wait(1);
+    print`임무 출력중...`;
+    flushMessage.mission();
+    wait(1);
+  }
+  print``;
+  flushMessage.mission();
+  print`
+반갑습니다 지휘관님.
+북의 기습적인 공격으로 전국적인 피해가 발생했습니다.
+이에 따라 지휘관님이 군과 행정에 이은 전권을 모두 지니게 되었습니다.
+이 사태에 대한 주변국의 도움을 받는걸 기대하긴 어렵습니다. 즉시 국토를 수복하고 반격에 나섭시오.
+`;
+  flushMessage.toast(10);
+  wait(11);
+  print`
+북한의 다연장 탄두 미사일 공격은 매우 치명적이지만 그 주기가 짧지 않습니다.
+미사일의 발사 지점은 개성인 것으로 파악됩니다.
+미사일이 남은 기지를 마저 파괴시키기 전에 가능한 빨리 개성을 공격해야 합니다!
+`;
+  flushMessage.toast(10);
+  wait(10);
+  print``;
 }
 
 let missileType;
 function setup() {
+  setRule.buildSpeed(Teams.sharded, 0);
   setBlock.block({ team: Teams.crux, x: 400, y: 400, to: Blocks.scathe, rotation: 0 });
   const scathe = fetch.build(Teams.crux, fetch.buildCount(Teams.crux, Blocks.scathe) - 1, Blocks.scathe);
   setProp(scathe).carbide = 100;
   setProp(scathe).water = 100;
+  print("[red]경고![] 미사일 공습 임박!");
+  flushMessage.notify();
   control.shoot({ building: scathe, x: 400, y: 410, shoot: true });
   while (true) {
     const missile = radar({ building: scathe, filters: ["ally", "flying", "any"], order: true, sort: "distance" });
@@ -76,9 +122,19 @@ function setup() {
   missileRaid();
   missileRaid();
   missileRaid();
+  setRule.buildSpeed(Teams.sharded, 1);
+  intro();
 }
 
-function update() {}
+function update() {
+  printLastTime(Vars.time, lastTime);
+  if (Vars.time - lastTime >= ATTACK_DELAY) {
+    lastTime = Vars.time;
+    printLastTime(Vars.time, Vars.time);
+    missileRaid();
+    printLastTime(Vars.time, Vars.time);
+  }
+}
 
 setup();
 while (true) {
