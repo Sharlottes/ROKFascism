@@ -2,7 +2,10 @@
   "compilerOptions": {
     "moduleDetection": "force",
     "noLib": true,
-    "types": []
+    "types": [],
+    "paths": {
+      "mlogjs:world": ["../lib/world.d.ts"]
+    }
   },
   "extends": "../tsconfig.json",
   "include": ["../lib", "*.js", "*.ts"],

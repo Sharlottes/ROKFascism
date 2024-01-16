@@ -11,5 +11,9 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^20.10.8"
+  },
+  "dependencies": {
+    "compiler": "link:local_mlogjs\\compiler",
+    "mlogjs": "../local_mlogjs/compiler"
   }
 }

@@ -1,3 +1,5 @@
+import { setRule } from "mlogjs:world";
+
 const scaleMap = {
   default: [292, 208, 471, 336],
   a: [292, 208, 471, 351],
