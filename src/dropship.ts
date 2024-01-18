@@ -47,7 +47,7 @@ function update() {
       unitControl.payDrop();
       effect.spawn(dropShip.x, dropShip.y);
       if (amount - 1 <= 0) {
-        effect.smokeCloud(dropShip.x, dropShip.y, packColor(242, 85, 85, 255));
+        effect.smokeCloud(dropShip.x, dropShip.y, packColor(0.94, 0.33, 0.33, 1));
         setProp(dropShip).x = 0;
         setProp(dropShip).y = 0;
         setProp(dropShip).health = 0;
