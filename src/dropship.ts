@@ -56,7 +56,7 @@ function update() {
   }
 }
 
-wait(7);
+wait(15);
 drop([414, 603], [622, 407], Teams.crux, Units.dagger, 20);
 drop([414, 603], [546, 373], Teams.crux, Units.atrax, 10);
 
