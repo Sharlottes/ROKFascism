@@ -1,33 +1,26 @@
-import * as world from "mlogjs:world";
+import { fetch, getBlock, Marker } from "mlogjs:world";
 
-const tmpArr = new DynamicArray<number>([17]);
-const arr = new DynamicArray<number>([17]);
-
-function createMarker(core: AnyBuilding) {
-  const id = (core.x << 16) | (core.y & 0xffff);
-  const marker = world.Marker.shapeText({ id, x: core.x, y: core.y, replace: true });
+const array = new DynamicArray<number>(36);
+const coreAmount = fetch.coreCount(Teams.sharded);
+for (let i = 0; i < coreAmount; i++) {
+  const core = fetch.core(Teams.sharded, i);
+  array.push(core.x);
+  array.push(core.y);
+  const marker = Marker.shapeText({ id: i, x: core.x, y: core.y, replace: false });
   marker.visible = false;
   marker.radius = core.size * 8;
   marker.fontSize = 1.5;
-  marker.text = "북한의 미사일 공격으로 지역이 초토화 되었습니다.\n[accent]지역을 수복하세요![]";
-  marker.visible = true;
-  return id;
-}
-
-function refresh() {
-  tmpArr.fill(-1);
-  for (let i = 0; i < world.fetch.coreCount(Teams.crux); i++) {
-    const core = world.fetch.core(Teams.crux, i);
-    if (core.y >= 541) continue;
-    const id = createMarker(core);
-    tmpArr[i] = id;
-  }
-  for (let i = 0; i < arr.length; i++) {
-    world.Marker.of(arr[i]).visible = false;
-    arr[i] = tmpArr[i];
-  }
+  print("북한의 미사일 공격으로 지역이 초토화 되었습니다.\n[accent]지역을 수복하세요![]");
+  marker.flushText({ fetch: true });
 }
 
 while (true) {
-  refresh();
+  for (let i = 0; i < array.length; i += 2) {
+    const x = array[i];
+    const y = array[i + 1];
+
+    const core = getBlock.building(x, y);
+    const marker = Marker.of(Math.idiv(i, 2));
+    marker.visible = core.team == 2;
+  }
 }
