@@ -65,7 +65,7 @@ function loopLoadout(i: number) {
       }
       print("[accent]랜드리스 접근중[]: ");
       //print("@lendlease-moving");
-      print`${Math.floor(Math.len(unit.x - x, unit.y - y))}m`;
+      print`${Math.floor(Math.len(unit.x - x, unit.y - y))}km`;
       marker.flushText({ fetch: true });
 
       unitBind(unit);
