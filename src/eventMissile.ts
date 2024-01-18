@@ -1,4 +1,4 @@
-import { spawnUnit, setProp, setBlock, fetch, flushMessage, setRule } from "mlogjs:world";
+import { spawnUnit, setProp, setBlock, fetch, flushMessage } from "mlogjs:world";
 
 function angleDeg(x1: number, y1: number, x2: number, y2: number) {
   const dx = x2 - x1;
@@ -26,21 +26,21 @@ function fire(fromX: number, fromY: number, toX: number, toY: number) {
 
   const lastTime = Vars.time;
   while (true) {
-    if (Vars.time - lastTime >= 10 * 1000) {
+    if (Vars.time - lastTime >= 1000) {
       setProp(mega).health = 0;
-      return;
+      break;
     }
     const missile = unitRadar({ filters: ["ally", "any", "any"], order: true, sort: "distance" });
-    if (!missile) continue;
-    if (missile.flag == 1) continue;
+    if (!missile) {
+      setProp(mega).health = 0;
+      break;
+    }
+    if (missile.type != ("scathe-missile" as any)) continue;
 
-    unitControl.flag(1);
     setProp(mega).health = 0;
-    const dist = Math.sqrt(Math.pow(fromX - toX, 2) + Math.pow(fromY - toY, 2));
-    if ((dist * 8) / (60 * 4) <= 4.6 * 60 * 5.5) setProp(missile).speed = (dist * 8) / (60 * 4);
-    setProp(missile).rotation = angleDeg(missile.x, missile.y, toX, toY);
-    unitBind(missile);
-    unitControl.move(toX, toY);
+    const dist = Math.len(fromX - toX, fromY - toY);
+    setProp(missile).speed = (dist * 8) / (60 * 4);
+    setProp(missile).rotation = deg;
     break;
   }
 }
@@ -53,7 +53,7 @@ function missileRaid() {
   for (let i = 0; i < 15; i++) {
     const core = fetch.core(Teams.sharded, i % coreAmount);
     fire(originX, originY, core.x, core.y);
-    wait(0.25);
+    wait(0.1);
   }
 }
 
@@ -69,19 +69,6 @@ function printLastTime(now: number, lastTime: number) {
 }
 
 function intro() {
-  for (let i = 0; i < 3; i++) {
-    print`임무 출력중.`;
-    flushMessage.mission();
-    wait(1);
-    print`임무 출력중..`;
-    flushMessage.mission();
-    wait(1);
-    print`임무 출력중...`;
-    flushMessage.mission();
-    wait(1);
-  }
-  print``;
-  flushMessage.mission();
   print`
 반갑습니다 지휘관님.
 북의 기습적인 공격으로 전국적인 피해가 발생했습니다.
@@ -96,13 +83,12 @@ function intro() {
 미사일이 남은 기지를 마저 파괴시키기 전에 가능한 빨리 개성을 공격해야 합니다!
 `;
   flushMessage.toast(10);
-  wait(10);
+  wait(11);
   print``;
 }
 
 let missileType;
 function setup() {
-  setRule.buildSpeed(Teams.sharded, 0);
   setBlock.block({ team: Teams.crux, x: 400, y: 400, to: Blocks.scathe, rotation: 0 });
   const scathe = fetch.build(Teams.crux, fetch.buildCount(Teams.crux, Blocks.scathe) - 1, Blocks.scathe);
   setProp(scathe).carbide = 100;
@@ -122,7 +108,6 @@ function setup() {
   missileRaid();
   missileRaid();
   missileRaid();
-  setRule.buildSpeed(Teams.sharded, 1);
   intro();
 }
 
