@@ -1,16 +1,12 @@
 {
-  "name": "mlog",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "scripts": {
-    "watch": "nodemon --watch ./src/mapScaler.ts ./scripts/watcher.js",
-    "dev": "mlogjs ./src/mapScaler.ts out.mlog"
+    "watch": "nodemon --watch ./src/mapScaler.ts ./scripts/watcher.js"
   },
+  "license": "Apache-2.0",
   "author": "Sharlottes",
-  "license": "MIT",
   "devDependencies": {
-    "@types/node": "^20.10.8"
+    "@types/node": "^20.10.8",
+    "nodemon": "^3.0.3"
   },
   "dependencies": {
     "compiler": "link:local_mlogjs\\compiler",
