@@ -25,12 +25,15 @@ marker1.fontSize = 0.7;
 marker2.fontSize = 0.7;
 marker3.fontSize = 0.7;
 
+//print("@itempos-tutorial");
 print`[lightgray]전쟁의 혼란으로 군수물자가 전국 곳곳에 퍼져있습니다.
 이 아이템포드에 달린 언로더로 [accent]자원을 빠르게 확보[]하세요.[]`;
 marker1.flushText({ fetch: true });
+//print("@itempos-tutorial");
 print`[lightgray]전쟁의 혼란으로 군수물자가 전국 곳곳에 퍼져있습니다.
 이 아이템포드에 달린 언로더로 [accent]자원을 빠르게 확보[]하세요.[]`;
 marker2.flushText({ fetch: true });
+//print("@itempos-tutorial");
 print`[lightgray]전쟁의 혼란으로 군수물자가 전국 곳곳에 퍼져있습니다.
 이 아이템포드에 달린 언로더로 [accent]자원을 빠르게 확보[]하세요.[]`;
 marker3.flushText({ fetch: true });

@@ -63,7 +63,8 @@ function loopLoadout(i: number) {
         loadoutDatasetArr[i + 2] = "back";
         break;
       }
-      print("@lendlease-moving");
+      print("[accent]랜드리스 접근중[]: ");
+      //print("@lendlease-moving");
       print`${Math.floor(Math.len(unit.x - x, unit.y - y))}m`;
       marker.flushText({ fetch: true });
 
@@ -92,7 +93,9 @@ function loopLoadout(i: number) {
       const lastTimeToDelay = delay - (Vars.time - lastTime);
       const second = Math.floor(((lastTimeToDelay / 1000) % 60) * 100) / 100;
       const minute = Math.floor((lastTimeToDelay / (1000 * 60)) % 60);
-      print("@lendlease-waiting");
+
+      print("다음 랜드리스까지: ");
+      //print("@lendlease-waiting");
       print`[accent]${minute}:${second}[]`;
       marker.flushText({ fetch: true });
 

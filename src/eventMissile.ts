@@ -37,7 +37,7 @@ function fire(fromX: number, fromY: number, toX: number, toY: number) {
 const originX = 467;
 const originY = 541;
 function missileRaid() {
-  print("[RED]Warning![] Missile strike imminent!");
+  print("[red]경고![] 미사일 공습 임박!");
   //print("@missile-notify");
   flushMessage.notify();
   printFlush();
@@ -56,27 +56,25 @@ function printLastTime(now: number, lastTime: number) {
   const ms = ATTACK_DELAY - (now - lastTime);
   const second = (ms / 1000) % 60;
   const minute = (ms / (1000 * 60)) % 60;
-  print("next missile strike:");
   //print("@missile-timer");
+  print("다음 미사일 공습:");
   print`[accent]${Math.floor(minute)}:${Math.floor(second * 10) / 10}[]`;
   flushMessage.mission();
   printFlush();
 }
 
 function intro() {
-  print`
-반갑습니다 지휘관님.
+  //print("@intro-one");
+  print`반갑습니다 지휘관님.
 북의 기습적인 공격으로 전국적인 피해가 발생했습니다.
 이에 따라 지휘관님이 군과 행정에 이은 전권을 모두 지니게 되었습니다.
-이 사태에 대한 주변국의 도움을 받는걸 기대하긴 어렵습니다. 즉시 국토를 수복하고 반격에 나섭시오.
-`;
+이 사태에 대한 주변국의 도움을 받는걸 기대하긴 어렵습니다. 즉시 국토를 수복하고 반격에 나섭시오.`;
   flushMessage.toast(10);
   wait(11);
-  print`
-북한의 다연장 탄두 미사일 공격은 매우 치명적이지만 그 주기가 짧지 않습니다.
+  //print("@intro-two");
+  print`북한의 다연장 탄두 미사일 공격은 매우 치명적이지만 그 주기가 짧지 않습니다.
 미사일의 발사 지점은 개성인 것으로 파악됩니다.
-미사일이 남은 기지를 마저 파괴시키기 전에 가능한 빨리 개성을 공격해야 합니다!
-`;
+미사일이 남은 기지를 마저 파괴시키기 전에 가능한 빨리 개성을 공격해야 합니다!`;
   flushMessage.toast(10);
   wait(11);
   print``;

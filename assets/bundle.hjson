@@ -8,14 +8,15 @@ The missile's launch site is believed to be the Kaesong City.
 You must attack Kaesong as soon as possible before the missiles destroy the rest of your base!
 
 missile-notify = [RED]Warning![] Missile strike imminent!
-missile-timer = next missile strike:
-restoration-marker = The area has been devastated by a missile strike from North Korea. [accent]Restorate the area![]
+missile-timer = next missile strike: 
+restoration-marker = The area has been devastated by a missile strike from North Korea. 
+[accent]Restorate the area![]
 
 lendlease-tutorial = someone is suggesting lendlease support via an unknown signal.
 Try building a valut to respond to the [accent]lendlease signal[].
 lendlease-idle = Waiting to receive landout signal...
-lendlease-moving = [accent]The lendlease is incomming[]: 
-lendlease-waiting = next lendlease is incomming in 
+lendlease-moving = [accent]The lendlease is incomming[]:  
+lendlease-waiting = next lendlease is incomming in  
 
 dropship-incomming = [red]Enemy airborne forces approaching![]
 
@@ -35,13 +36,14 @@ intro-two = 북한의 다연장 탄두 미사일 공격은 매우 치명적이�
 
 missile-notify = [red]경고![] 미사일 공습 임박!
 missile-timer = 다음 미사일 공습:
-restoration-marker = 북한의 미사일 공격으로 지역이 초토화 되었습니다. [accent]지역을 수복하세요![]
+restoration-marker = 북한의 미사일 공격으로 지역이 초토화 되었습니다. 
+[accent]지역을 수복하세요![]
 
 lendlease-tutorial = 누군가가 출처를 알 수 없는 신호를 통해 랜드리스 지원을 제안하고 있습니다.
 창고를 설치하여 [accent]랜드리스 신호에 응답[]해보세요.
 lendlease-idle = 랜드리스 신호 수신 대기중...
 lendlease-moving = [accent]랜드리스 접근중[]: 
-lendlease-waiting = 다음 랜드리스까지:
+lendlease-waiting = 다음 랜드리스까지: 
 
 dropship-incomming = [red]적 공수부대 접근중![]
 
