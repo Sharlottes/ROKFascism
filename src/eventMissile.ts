@@ -14,8 +14,8 @@ function fire(fromX: number, fromY: number, toX: number, toY: number) {
   const mega = spawnUnit({
     type: Units.mega,
     team: Teams.crux,
-    x: fromX,
-    y: fromY,
+    x: 0,
+    y: 0,
     rotation: deg,
   });
   setProp(mega).payloadType = missileType;
@@ -24,25 +24,14 @@ function fire(fromX: number, fromY: number, toX: number, toY: number) {
   unitBind(mega);
   unitControl.payDrop();
 
-  const lastTime = Vars.time;
-  while (true) {
-    if (Vars.time - lastTime >= 1000) {
-      setProp(mega).health = 0;
-      break;
-    }
-    const missile = unitRadar({ filters: ["ally", "any", "any"], order: true, sort: "distance" });
-    if (!missile) {
-      setProp(mega).health = 0;
-      break;
-    }
-    if (missile.type != ("scathe-missile" as any)) continue;
-
-    setProp(mega).health = 0;
-    const dist = Math.len(fromX - toX, fromY - toY);
-    setProp(missile).speed = (dist * 8) / (60 * 4);
-    setProp(missile).rotation = deg;
-    break;
-  }
+  const missile = unitRadar({ filters: ["ally", "any", "any"], order: true, sort: "distance" });
+  setProp(mega).health = 0;
+  if (!missile) return;
+  const dist = Math.len(fromX - toX, fromY - toY);
+  setProp(missile).speed = (dist * 8) / (60 * 4);
+  setProp(missile).x = fromX;
+  setProp(missile).y = fromY;
+  setProp(missile).rotation = deg;
 }
 
 function missileRaid() {
