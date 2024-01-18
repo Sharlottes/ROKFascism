@@ -1,6 +1,6 @@
 import { effect, fetch, setProp, spawnUnit } from "mlogjs:world";
 
-const dropShips = new DynamicArray<any>(8000);
+const dropShips = new DynamicArray<any>(8);
 
 let stack = 0;
 function drop(
