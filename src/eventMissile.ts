@@ -34,10 +34,13 @@ function fire(fromX: number, fromY: number, toX: number, toY: number) {
   setProp(missile).rotation = deg;
 }
 
+const originX = 467;
+const originY = 541;
 function missileRaid() {
-  const originX = 467;
-  const originY = 541;
-
+  print("[RED]Warning![] Missile strike imminent!");
+  //print("@missile-notify");
+  flushMessage.notify();
+  printFlush();
   const coreAmount = fetch.coreCount(Teams.sharded);
   const missileAmount = Math.min(3 * coreAmount, 15);
   for (let i = 0; i < missileAmount; i++) {
@@ -53,7 +56,9 @@ function printLastTime(now: number, lastTime: number) {
   const ms = ATTACK_DELAY - (now - lastTime);
   const second = (ms / 1000) % 60;
   const minute = (ms / (1000 * 60)) % 60;
-  print`다음 미사일 공습: [accent]${Math.floor(minute)}분 ${Math.floor(second * 10) / 10}초[]`;
+  print("next missile strike:");
+  //print("@missile-timer");
+  print`[accent]${Math.floor(minute)}:${Math.floor(second * 10) / 10}[]`;
   flushMessage.mission();
   printFlush();
 }
@@ -83,8 +88,6 @@ function setup() {
   const scathe = fetch.build(Teams.crux, fetch.buildCount(Teams.crux, Blocks.scathe) - 1, Blocks.scathe);
   setProp(scathe).carbide = 100;
   setProp(scathe).water = 100;
-  print("[red]경고![] 미사일 공습 임박!");
-  flushMessage.notify();
   control.shoot({ building: scathe, x: 400, y: 410, shoot: true });
   while (true) {
     const missile = radar({ building: scathe, filters: ["ally", "flying", "any"], order: true, sort: "distance" });

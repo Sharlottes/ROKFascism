@@ -14,12 +14,12 @@ const marker2 = Marker.shapeText({
   replace: false,
 });
 const redColor = packColor(1, 0, 0, 1);
-print`[red]적 공수부대 접근중![]`;
+print("@dropship-incomming");
 marker1.radius = 32;
 marker1.color = redColor;
 marker1.fontSize = 2;
 marker1.flushText({ fetch: true });
-print`[red]적 공수부대 접근중![]`;
+print("@dropship-incomming");
 marker2.radius = 32;
 marker2.color = redColor;
 marker2.fontSize = 2;

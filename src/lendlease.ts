@@ -51,7 +51,7 @@ function loopLoadout(i: number) {
   // control unit
   switch (state) {
     case "idle": {
-      print`waiting to receive landout signal...`;
+      print("@lendlease-idle");
       marker.flushText({ fetch: true });
       if (isValid) {
         loadoutDatasetArr[i + 2] = "waiting";
@@ -63,7 +63,8 @@ function loopLoadout(i: number) {
         loadoutDatasetArr[i + 2] = "back";
         break;
       }
-      print`[accent]lendlease is incomming[]: ${Math.floor(Math.len(unit.x - x, unit.y - y))}m`;
+      print("@lendlease-moving");
+      print`${Math.floor(Math.len(unit.x - x, unit.y - y))}m`;
       marker.flushText({ fetch: true });
 
       unitBind(unit);
@@ -91,7 +92,8 @@ function loopLoadout(i: number) {
       const lastTimeToDelay = delay - (Vars.time - lastTime);
       const second = Math.floor(((lastTimeToDelay / 1000) % 60) * 100) / 100;
       const minute = Math.floor((lastTimeToDelay / (1000 * 60)) % 60);
-      print`next lendlease is incomming in [accent]${minute}:${second}[]`;
+      print("@lendlease-waiting");
+      print`[accent]${minute}:${second}[]`;
       marker.flushText({ fetch: true });
 
       if (lastTimeToDelay < 0) {

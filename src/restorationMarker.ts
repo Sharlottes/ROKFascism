@@ -10,7 +10,7 @@ for (let i = 0; i < coreAmount; i++) {
   marker.visible = false;
   marker.radius = core.size * 8;
   marker.fontSize = 1.5;
-  print("북한의 미사일 공격으로 지역이 초토화 되었습니다.\n[accent]지역을 수복하세요![]");
+  print("@restoration-marker");
   marker.flushText({ fetch: true });
 }
 
