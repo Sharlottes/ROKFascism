@@ -82,19 +82,19 @@ function intro() {
 
 let missileType;
 function setup() {
-  setBlock.block({ team: Teams.crux, x: 400, y: 400, to: Blocks.scathe, rotation: 0 });
+  setBlock.block({ team: Teams.crux, x: 300, y: 210, to: Blocks.scathe, rotation: 0 });
   const scathe = fetch.build(Teams.crux, fetch.buildCount(Teams.crux, Blocks.scathe) - 1, Blocks.scathe);
   setProp(scathe).carbide = 100;
   setProp(scathe).water = 100;
-  control.shoot({ building: scathe, x: 400, y: 410, shoot: true });
+  control.shoot({ building: scathe, x: 310, y: 220, shoot: true });
   while (true) {
     const missile = radar({ building: scathe, filters: ["ally", "flying", "any"], order: true, sort: "distance" });
-    if (missile) {
-      missileType = missile.type;
-      setProp(scathe).health = 0;
-      setProp(missile).health = 0;
-      break;
-    }
+    if (!missile) continue;
+    if (Math.len(300 - missile.x, 210 - missile.y) > 20) continue;
+    missileType = missile.type;
+    setProp(scathe).health = 0;
+    setProp(missile).health = 0;
+    break;
   }
   missileRaid();
   missileRaid();
