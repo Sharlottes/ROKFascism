@@ -124,7 +124,6 @@ function loopDropship(i: number) {
       unitBind(unit);
       unitControl.move(fromX, fromY);
       if (Math.len(unit.x - fromX, unit.y - fromY) < 1) {
-        setProp(unit).health = 0;
         datasetArray[i + 10] = "waiting";
       }
     }
@@ -153,27 +152,31 @@ function update() {
 const loadout = new MutableArray([
   // 0
   Units.dagger,
-  20,
+  5,
+  Units.nova,
+  3,
   // 1
   Units.atrax,
-  10,
+  2,
+  Units.crawler,
+  6,
 ]);
 
 setupDropship({
   from: [414, 603],
   to: [622, 407],
   unitType: Units.quad,
-  delay: 50 * 1000,
+  delay: 40 * 1000,
   markerId: 50,
-  loadoutAmount: 1,
+  loadoutAmount: 2,
 });
 setupDropship({
   from: [414, 603],
   to: [546, 373],
   unitType: Units.quad,
-  delay: 15 * 1000,
+  delay: 25 * 1000,
   markerId: 51,
-  loadoutAmount: 1,
+  loadoutAmount: 2,
 });
 
 while (true) {
