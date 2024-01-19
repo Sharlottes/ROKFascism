@@ -1,6 +1,6 @@
 import { Marker, effect, getBlock, setProp, setRule, spawnUnit } from "mlogjs:world";
 const ITEMS_PER_ARR = 8;
-const LOADOUT_SETUP_COUNT = 2;
+const LOADOUT_SETUP_COUNT = 3;
 
 // [unitId, unitTypeId, state, markerId, lastTime, delay, x, y]
 const lendleaseDatasetArr = new DynamicArray<any>(ITEMS_PER_ARR * LOADOUT_SETUP_COUNT);
@@ -21,7 +21,10 @@ function setupLendlease({
   delay: number;
   markerId: number;
 }) {
-  Marker.text({ id: markerId, x, y, replace: false });
+  const marker = Marker.text({ id: markerId, x, y, replace: false });
+  print("@lendlease-idle");
+  marker.flushText({ fetch: true });
+
   lendleaseDatasetArr.push(undefined);
   lendleaseDatasetArr.push(unitType.id);
   lendleaseDatasetArr.push("idle");
@@ -152,6 +155,20 @@ setupLendlease({
   unitType: Units.quad,
   delay: 50 * 1000,
   markerId: 18,
+});
+setupLendlease({
+  x: 456,
+  y: 334,
+  unitType: Units.quad,
+  delay: 40 * 1000,
+  markerId: 19,
+});
+setupLendlease({
+  x: 469,
+  y: 507,
+  unitType: Units.quad,
+  delay: 30 * 1000,
+  markerId: 20,
 });
 while (true) {
   for (let i = 0; i < lendleaseDatasetArr.length; i += ITEMS_PER_ARR) {
