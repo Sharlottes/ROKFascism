@@ -3,12 +3,12 @@ const ITEMS_PER_ARR = 8;
 const LOADOUT_SETUP_COUNT = 2;
 
 // [unitId, unitTypeId, state, markerId, lastTime, delay, x, y]
-const loadoutDatasetArr = new DynamicArray<any>(ITEMS_PER_ARR * LOADOUT_SETUP_COUNT);
+const lendleaseDatasetArr = new DynamicArray<any>(ITEMS_PER_ARR * LOADOUT_SETUP_COUNT);
 const originX = 480;
 const originY = 130;
 setRule.unitCap(10);
 
-function setupLoadout({
+function setupLendlease({
   x,
   y,
   unitType,
@@ -22,30 +22,30 @@ function setupLoadout({
   markerId: number;
 }) {
   Marker.text({ id: markerId, x, y, replace: false });
-  loadoutDatasetArr.push(undefined);
-  loadoutDatasetArr.push(unitType.id);
-  loadoutDatasetArr.push("idle");
-  loadoutDatasetArr.push(markerId);
-  loadoutDatasetArr.push(Vars.time);
-  loadoutDatasetArr.push(delay);
-  loadoutDatasetArr.push(x);
-  loadoutDatasetArr.push(y);
+  lendleaseDatasetArr.push(undefined);
+  lendleaseDatasetArr.push(unitType.id);
+  lendleaseDatasetArr.push("idle");
+  lendleaseDatasetArr.push(markerId);
+  lendleaseDatasetArr.push(Vars.time);
+  lendleaseDatasetArr.push(delay);
+  lendleaseDatasetArr.push(x);
+  lendleaseDatasetArr.push(y);
 }
 
-function loopLoadout(i: number) {
-  const unit = loadoutDatasetArr[i] as AnyUnit | undefined;
-  const state = loadoutDatasetArr[i + 2];
-  const markerId = loadoutDatasetArr[i + 3];
-  const lastTime = loadoutDatasetArr[i + 4];
-  const delay = loadoutDatasetArr[i + 5];
-  const x = loadoutDatasetArr[i + 6];
-  const y = loadoutDatasetArr[i + 7];
+function loopLendlease(i: number) {
+  const unit = lendleaseDatasetArr[i] as AnyUnit | undefined;
+  const state = lendleaseDatasetArr[i + 2];
+  const markerId = lendleaseDatasetArr[i + 3];
+  const lastTime = lendleaseDatasetArr[i + 4];
+  const delay = lendleaseDatasetArr[i + 5];
+  const x = lendleaseDatasetArr[i + 6];
+  const y = lendleaseDatasetArr[i + 7];
 
   const marker = Marker.of(markerId);
   const valut = getBlock.building(x, y);
   const isValid = valut != undefined && valut.type == Blocks.vault;
   if (!isValid) {
-    loadoutDatasetArr[i + 2] = "idle";
+    lendleaseDatasetArr[i + 2] = "idle";
   }
 
   // control unit
@@ -54,13 +54,13 @@ function loopLoadout(i: number) {
       print("@lendlease-idle");
       marker.flushText({ fetch: true });
       if (isValid) {
-        loadoutDatasetArr[i + 2] = "waiting";
+        lendleaseDatasetArr[i + 2] = "waiting";
       }
       break;
     }
     case "moving": {
       if (!isValid) {
-        loadoutDatasetArr[i + 2] = "back";
+        lendleaseDatasetArr[i + 2] = "back";
         break;
       }
       print("[accent]랜드리스 접근중[]: ");
@@ -71,13 +71,13 @@ function loopLoadout(i: number) {
       unitBind(unit);
       unitControl.move(x, y);
       if (Math.len(unit.x - x, unit.y - y) > 1) break;
-      loadoutDatasetArr[i + 2] = "landing";
+      lendleaseDatasetArr[i + 2] = "landing";
       break;
     }
     case "landing": {
       givelendlease(unit, valut);
-      loadoutDatasetArr[i + 2] = "back";
-      loadoutDatasetArr[i + 4] = Vars.time;
+      lendleaseDatasetArr[i + 2] = "back";
+      lendleaseDatasetArr[i + 4] = Vars.time;
       break;
     }
     case "back": {
@@ -86,7 +86,7 @@ function loopLoadout(i: number) {
       unitControl.move(originX, originY);
       if (Math.len(unit.x - originX, unit.y - originY) < 1) {
         setProp(unit).health = 0;
-        loadoutDatasetArr[i + 2] = "waiting";
+        lendleaseDatasetArr[i + 2] = "waiting";
       }
     }
     case "waiting": {
@@ -100,12 +100,12 @@ function loopLoadout(i: number) {
       marker.flushText({ fetch: true });
 
       if (lastTimeToDelay < 0) {
-        const unitTypeId = loadoutDatasetArr[i + 1];
+        const unitTypeId = lendleaseDatasetArr[i + 1];
         const unit = spawnUnit({ x: originX, y: originY, type: lookup.unit(unitTypeId), team: Teams.derelict });
         setProp(unit).speed = 2.5;
         setProp(unit).health = 200;
-        loadoutDatasetArr[i] = unit;
-        loadoutDatasetArr[i + 2] = "moving";
+        lendleaseDatasetArr[i] = unit;
+        lendleaseDatasetArr[i + 2] = "moving";
       }
       break;
     }
@@ -146,7 +146,7 @@ function givelendlease(unit: AnyUnit, valut: AnyBuilding) {
   }
 }
 
-setupLoadout({
+setupLendlease({
   x: 648,
   y: 365,
   unitType: Units.quad,
@@ -154,7 +154,7 @@ setupLoadout({
   markerId: 18,
 });
 while (true) {
-  for (let i = 0; i < loadoutDatasetArr.length; i += ITEMS_PER_ARR) {
-    loopLoadout(i);
+  for (let i = 0; i < lendleaseDatasetArr.length; i += ITEMS_PER_ARR) {
+    loopLendlease(i);
   }
 }
