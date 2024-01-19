@@ -3,5 +3,4 @@
 [30, 50): tutorials
   - 30: lendlease tutorial
   - 31,32,33: itempod tutorial
-  - 34,35: dropship tutorial
-
+[50, 70): dropship marker  
