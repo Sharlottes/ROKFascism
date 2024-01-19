@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "watch": "nodemon --watch ./src/mapScaler.ts ./scripts/watcher.js"
+    "watch": "nodemon --watch ./src/mapScaler.ts ./scripts/watcher.js",
+    "postinstall": "yarn mlogjs setup && rm -rf lib && mv .mlogjs/lib . && rm -rf .mlogjs"
   },
   "license": "Apache-2.0",
   "author": "Sharlottes",
@@ -10,6 +11,6 @@
   },
   "dependencies": {
     "compiler": "link:local_mlogjs\\compiler",
-    "mlogjs": "../local_mlogjs/compiler"
+    "mlogjs": "./local_mlogjs/compiler"
   }
 }
