@@ -1,4 +1,4 @@
-import { spawnUnit, setProp, setBlock, fetch, flushMessage } from "mlogjs:world";
+import { spawnUnit, setProp, setBlock, fetch, flushMessage, PVars, Marker } from "mlogjs:world";
 
 function angleDeg(x1: number, y1: number, x2: number, y2: number) {
   const dx = x2 - x1;
@@ -56,10 +56,13 @@ function printLastTime(now: number, lastTime: number) {
   const ms = ATTACK_DELAY - (now - lastTime);
   const second = (ms / 1000) % 60;
   const minute = (ms / (1000 * 60)) % 60;
+
   //print("@missile-timer");
   print("다음 미사일 공습:");
   print`[accent]${Math.floor(minute)}:${Math.floor(second * 10) / 10}[]`;
-  flushMessage.mission();
+  // TODO: 개성에 마커 추가
+  const marker = Marker.of(1234);
+  marker.flushText({ fetch: true });
   printFlush();
 }
 
@@ -70,12 +73,14 @@ function intro() {
 이에 따라 지휘관님이 군과 행정에 이은 전권을 모두 지니게 되었습니다.
 이 사태에 대한 주변국의 도움을 받는걸 기대하긴 어렵습니다. 즉시 국토를 수복하고 반격에 나섭시오.`;
   flushMessage.toast(10);
+  printFlush();
   wait(11);
   //print("@intro-two");
   print`북한의 다연장 탄두 미사일 공격은 매우 치명적이지만 그 주기가 짧지 않습니다.
 미사일의 발사 지점은 개성인 것으로 파악됩니다.
 미사일이 남은 기지를 마저 파괴시키기 전에 가능한 빨리 개성을 공격해야 합니다!`;
   flushMessage.toast(10);
+  printFlush();
   wait(11);
   print``;
 }

@@ -10,8 +10,9 @@ function loopQuest(i: number) {
   const name = questDatasetArray[i];
   const conditionId = questDatasetArray[i + 1];
 
-  print`퀘스트: ${name}`;
-  flushMessage.toast(0);
+  print`[accent]퀘스트[]: ${name}`;
+  flushMessage.mission();
+  printFlush();
 }
 
 setupQuest({
