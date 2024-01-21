@@ -1,0 +1,1 @@
+java -jar -Xmx3G assets/Mindustry-BE.jar 
