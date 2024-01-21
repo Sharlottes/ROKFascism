@@ -1,1 +1,1 @@
-java -jar -Xmx3G assets/Mindustry-BE.jar 
+java -jar -Xmx4G assets/Mindustry-BE.jar 
