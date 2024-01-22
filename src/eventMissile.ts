@@ -1,4 +1,4 @@
-import { spawnUnit, setProp, setBlock, fetch, flushMessage, PVars, Marker } from "mlogjs:world";
+import { spawnUnit, setProp, setBlock, fetch, flushMessage, getFlag, setFlag } from "mlogjs:world";
 
 function angleDeg(x1: number, y1: number, x2: number, y2: number) {
   const dx = x2 - x1;
@@ -37,9 +37,6 @@ function fire(fromX: number, fromY: number, toX: number, toY: number) {
 const originX = 467;
 const originY = 541;
 function missileRaid() {
-  print("[red]경고![] 미사일 공습 임박!");
-  //print("@missile-notify");
-  flushMessage.notify();
   printFlush();
   const coreAmount = fetch.coreCount(Teams.sharded);
   const missileAmount = Math.min(3 * coreAmount, 15);
@@ -50,20 +47,22 @@ function missileRaid() {
   }
 }
 
-let lastTime = Vars.time;
-const ATTACK_DELAY = 3 * 60 * 1000;
-function printLastTime(now: number, lastTime: number) {
-  const ms = ATTACK_DELAY - (now - lastTime);
-  const second = (ms / 1000) % 60;
-  const minute = (ms / (1000 * 60)) % 60;
-
-  //print("@missile-timer");
-  print("다음 미사일 공습:");
-  print`[accent]${Math.floor(minute)}:${Math.floor(second * 10) / 10}[]`;
-  // TODO: 개성에 마커 추가
-  const marker = Marker.of(1234);
-  marker.flushText({ fetch: true });
-  printFlush();
+let missileType: UnitSymbol;
+function getMissileType() {
+  setBlock.block({ team: Teams.crux, x: 300, y: 210, to: Blocks.scathe, rotation: 0 });
+  const scathe = fetch.build(Teams.crux, fetch.buildCount(Teams.crux, Blocks.scathe) - 1, Blocks.scathe);
+  setProp(scathe).carbide = 100;
+  setProp(scathe).water = 100;
+  control.shoot({ building: scathe, x: 310, y: 220, shoot: true });
+  while (true) {
+    const missile = radar({ building: scathe, filters: ["ally", "flying", "any"], order: true, sort: "distance" });
+    if (!missile) continue;
+    if (Math.len(300 - missile.x, 210 - missile.y) > 20) continue;
+    missileType = missile.type;
+    setProp(scathe).health = 0;
+    setProp(missile).health = 0;
+    break;
+  }
 }
 
 function intro() {
@@ -85,22 +84,8 @@ function intro() {
   print``;
 }
 
-let missileType;
 function setup() {
-  setBlock.block({ team: Teams.crux, x: 300, y: 210, to: Blocks.scathe, rotation: 0 });
-  const scathe = fetch.build(Teams.crux, fetch.buildCount(Teams.crux, Blocks.scathe) - 1, Blocks.scathe);
-  setProp(scathe).carbide = 100;
-  setProp(scathe).water = 100;
-  control.shoot({ building: scathe, x: 310, y: 220, shoot: true });
-  while (true) {
-    const missile = radar({ building: scathe, filters: ["ally", "flying", "any"], order: true, sort: "distance" });
-    if (!missile) continue;
-    if (Math.len(300 - missile.x, 210 - missile.y) > 20) continue;
-    missileType = missile.type;
-    setProp(scathe).health = 0;
-    setProp(missile).health = 0;
-    break;
-  }
+  getMissileType();
   missileRaid();
   missileRaid();
   missileRaid();
@@ -108,12 +93,10 @@ function setup() {
 }
 
 function update() {
-  printLastTime(Vars.time, lastTime);
-  if (Vars.time - lastTime >= ATTACK_DELAY) {
-    lastTime = Vars.time;
-    printLastTime(Vars.time, Vars.time);
+  const isCooltimeEnd = getFlag("missile-cooltime-end");
+  if (isCooltimeEnd) {
     missileRaid();
-    printLastTime(Vars.time, Vars.time);
+    setFlag("missile-cooltime-end", false);
   }
 }
 

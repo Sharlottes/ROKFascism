@@ -16,7 +16,7 @@ lendlease-tutorial = someone is suggesting lendlease support via an unknown sign
 Try building a valut to respond to the [accent]lendlease signal[].
 lendlease-idle = Waiting to receive landout signal...
 lendlease-moving = [accent]The lendlease is incomming[]:  
-lendlease-waiting = next lendlease is incomming in  
+lendlease-waiting = next lendlease is incomming in 
 
 dropship-incomming = [red]Enemy airborne forces approaching![]
 
@@ -35,7 +35,7 @@ intro-two = 북한의 다연장 탄두 미사일 공격은 매우 치명적이�
 미사일이 남은 기지를 마저 파괴시키기 전에 가능한 빨리 개성을 공격해야 합니다!
 
 missile-notify = [red]경고![] 미사일 공습 임박!
-missile-timer = 다음 미사일 공습:
+missile-timer = 다음 미사일 공습: 
 restoration-marker = 북한의 미사일 공격으로 지역이 초토화 되었습니다. 
 [accent]지역을 수복하세요![]
 
