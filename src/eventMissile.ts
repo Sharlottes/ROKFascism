@@ -1,4 +1,4 @@
-import { spawnUnit, setProp, setBlock, fetch, flushMessage, getFlag, setFlag } from "mlogjs:world";
+import { spawnUnit, setProp, setBlock, fetch, flushMessage, getFlag, setFlag, localePrint } from "mlogjs:world";
 
 function angleDeg(x1: number, y1: number, x2: number, y2: number) {
   const dx = x2 - x1;
@@ -37,7 +37,10 @@ function fire(fromX: number, fromY: number, toX: number, toY: number) {
 const originX = 467;
 const originY = 541;
 function missileRaid() {
+  localePrint("missile-notify");
+  flushMessage.notify();
   printFlush();
+
   const coreAmount = fetch.coreCount(Teams.sharded);
   const missileAmount = Math.min(3 * coreAmount, 15);
   for (let i = 0; i < missileAmount; i++) {
@@ -74,6 +77,7 @@ function intro() {
   flushMessage.toast(10);
   printFlush();
   wait(11);
+  setFlag("start-quest-processor", true);
   //print("@intro-two");
   print`북한의 다연장 탄두 미사일 공격은 매우 치명적이지만 그 주기가 짧지 않습니다.
 미사일의 발사 지점은 개성인 것으로 파악됩니다.
@@ -95,8 +99,8 @@ function setup() {
 function update() {
   const isCooltimeEnd = getFlag("missile-cooltime-end");
   if (isCooltimeEnd) {
-    missileRaid();
     setFlag("missile-cooltime-end", false);
+    missileRaid();
   }
 }
 

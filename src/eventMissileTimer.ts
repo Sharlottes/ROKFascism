@@ -1,4 +1,4 @@
-import { flushMessage, localePrint, Marker, setFlag, setRate } from "mlogjs:world";
+import { localePrint, Marker, setFlag, setRate } from "mlogjs:world";
 
 let lastTime = Vars.time;
 const ATTACK_DELAY = 3 * 60 * 1000;
@@ -14,10 +14,7 @@ marker.drawLayer = 1000;
 
 const cameraXSensor = getVar<symbol>("@cameraX");
 const cameraYSensor = getVar<symbol>("@cameraY");
-const cameraWidthSensor = getVar<symbol>("@cameraWidth");
 const cameraHeightSensor = getVar<symbol>("@cameraHeight");
-let lh = 0,
-  dh = 0;
 
 setRate(1000);
 function update() {
@@ -30,8 +27,6 @@ function update() {
   const cameraX = sensor<number>(cameraXSensor, clientUnit);
   const cameraY = sensor<number>(cameraYSensor, clientUnit);
   const cameraHeight = sensor<number>(cameraHeightSensor, clientUnit);
-  dh = lh - cameraHeight;
-  lh = cameraHeight;
 
   marker.pos = { x: cameraX, y: cameraY + cameraHeight / 2.5 };
 
@@ -45,10 +40,6 @@ function update() {
     lastTime = Vars.time;
 
     setFlag("missile-cooltime-end", true);
-
-    localePrint("@missile-notify");
-    flushMessage.notify();
-    printFlush();
   }
 }
 
