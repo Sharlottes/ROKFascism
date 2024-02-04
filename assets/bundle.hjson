@@ -1,51 +1,50 @@
 en:
-intro-one = Greetings, Commander.
-A surprise attack by the North has caused devastation across the country.
-As a result, you have assumed full military and administrative authority.
-We can't expect any help from our neighbors in this situation. you have to immediately reclaim the country and launch a counterattack.
-intro-two = North Korea's multi missile attacks are highly lethal but not frequent.
-The missile's launch site is believed to be the Kaesong City.
-You must attack Kaesong as soon as possible before the missiles destroy the rest of your base!
+intro-one = Greetings, Commander.\nA surprise attack by the North has caused devastation across the country.\nAs a result, you have assumed full military and administrative authority.\nWe can't expect any help from our neighbors in this situation. you have to immediately reclaim the country and launch a counterattack.
+intro-two = North Korea's multi missile attacks are highly lethal but not frequent.\nThe missile's launch site is believed to be the Kaesong City.\nYou must attack Kaesong as soon as possible before the missiles destroy the rest of your base!
 
 missile-notify = [RED]Warning![] Missile strike imminent!
 missile-timer = next missile strike: 
-restoration-marker = The area has been devastated by a missile strike from North Korea. 
-[accent]Restorate the area![]
+restoration-marker = The area has been devastated by a missile strike from North Korea.\n[accent]Restorate the area![]
 
-lendlease-tutorial = someone is suggesting lendlease support via an unknown signal.
-Try building a valut to respond to the [accent]lendlease signal[].
+lendlease-tutorial = someone is suggesting lendlease support via an unknown signal.\nTry building a valut to respond to the [accent]lendlease signal[].
 lendlease-idle = Waiting to receive landout signal...
 lendlease-moving = [accent]The lendlease is incomming[]:  
 lendlease-waiting = next lendlease is incomming in 
 
 dropship-incomming = [red]Enemy airborne forces approaching![]
 
-itempos-tutorial = [lightgray]In the chaos of war, munitions are scattered across the country.
-you can [accent]get resources[] via unloader or yourself.
+itempos-tutorial = [lightgray]In the chaos of war, munitions are scattered across the country.\nyou can [accent]get resources[] via unloader or yourself.
 
+quest.reward = rewards
+quest.restoration.yeongnam.title = Reconquista: Youngnam
+quest.restoration.yeongnam.description = we need an area to base our counterattack on.
+quest.restoration.honam.title = Reconquista: Hunan
+quest.restoration.honam.description = We need more resources and additional lendlease.
+quest.restoration.tothenorth.title = Reconquista: To The North
+quest.restoration.tothenorth.description = Toward our capital.
 
 
 ko:
-intro-one = 반갑습니다 지휘관님.
-북의 기습적인 공격으로 전국적인 피해가 발생했습니다.
-이에 따라 지휘관님이 군과 행정에 이은 전권을 모두 지니게 되었습니다.
-이 사태에 대한 주변국의 도움을 받는걸 기대하긴 어렵습니다. 즉시 국토를 수복하고 반격에 나섭시오.
-intro-two = 북한의 다연장 탄두 미사일 공격은 매우 치명적이지만 그 주기가 짧지 않습니다.
-미사일의 발사 지점은 개성인 것으로 파악됩니다.
-미사일이 남은 기지를 마저 파괴시키기 전에 가능한 빨리 개성을 공격해야 합니다!
+intro-one = 반갑습니다 지휘관님.\n북의 기습적인 공격으로 전국적인 피해가 발생했습니다.\n이에 따라 지휘관님이 군과 행정에 이은 전권을 모두 지니게 되었습니다.\n이 사태에 대한 주변국의 도움을 받는걸 기대하긴 어렵습니다. 즉시 국토를 수복하고 반격에 나섭시오.
+intro-two = 북한의 다연장 탄두 미사일 공격은 매우 치명적이지만 그 주기가 짧지 않습니다.\n미사일의 발사 지점은 개성인 것으로 파악됩니다.\n미사일이 남은 기지를 마저 파괴시키기 전에 가능한 빨리 개성을 공격해야 합니다!
 
 missile-notify = [red]경고![] 미사일 공습 임박!
 missile-timer = 다음 미사일 공습: 
-restoration-marker = 북한의 미사일 공격으로 지역이 초토화 되었습니다. 
-[accent]지역을 수복하세요![]
+restoration-marker = 북한의 미사일 공격으로 지역이 초토화 되었습니다. \n[accent]지역을 수복하세요![]
 
-lendlease-tutorial = 누군가가 출처를 알 수 없는 신호를 통해 랜드리스 지원을 제안하고 있습니다.
-창고를 설치하여 [accent]랜드리스 신호에 응답[]해보세요.
+lendlease-tutorial = 누군가가 출처를 알 수 없는 신호를 통해 랜드리스 지원을 제안하고 있습니다.\n창고를 설치하여 [accent]랜드리스 신호에 응답[]해보세요.
 lendlease-idle = 랜드리스 신호 수신 대기중...
 lendlease-moving = [accent]랜드리스 접근중[]: 
 lendlease-waiting = 다음 랜드리스까지: 
 
 dropship-incomming = [red]적 공수부대 접근중![]
 
-itempos-tutorial = [lightgray]전쟁의 혼란으로 군수물자가 전국 곳곳에 퍼져있습니다.
-이 아이템포드에 달린 언로더로 [accent]자원을 빠르게 확보[]하세요.[]
+itempos-tutorial = [lightgray]전쟁의 혼란으로 군수물자가 전국 곳곳에 퍼져있습니다.\n이 아이템포드에 달린 언로더로 [accent]자원을 빠르게 확보[]하세요.[]
+
+quest.reward = 보상
+quest.restoration.yeongnam.title = 국토수복: 영남
+quest.restoration.yeongnam.description = 반격할 기반이 될 지역이 필요합니다.
+quest.restoration.honam.title = 국토수복: 호남
+quest.restoration.honam.description = 더 많은 자원과 추가 렌드리스가 필요합니다.
+quest.restoration.tothenorth.title = 국토수복: 북으로
+quest.restoration.tothenorth.description = 우리의 수도를 향하여.

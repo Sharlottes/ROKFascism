@@ -1,4 +1,4 @@
-import { Marker, effect, getBlock, setProp, setRule, spawnUnit } from "mlogjs:world";
+import { Marker, effect, getBlock, localePrint, setProp, setRule, spawnUnit } from "mlogjs:world";
 const ITEMS_PER_ARR = 8;
 const LOADOUT_SETUP_COUNT = 3;
 
@@ -22,7 +22,7 @@ function setupLendlease({
   markerId: number;
 }) {
   const marker = Marker.text({ id: markerId, x, y, replace: false });
-  print("@lendlease-idle");
+  localePrint("lendlease-idle");
   marker.flushText({ fetch: true });
 
   lendleaseDatasetArr.push(undefined);
@@ -54,7 +54,7 @@ function loopLendlease(i: number) {
   // control unit
   switch (state) {
     case "idle": {
-      print("@lendlease-idle");
+      localePrint("lendlease-idle");
       marker.flushText({ fetch: true });
       if (isValid) {
         lendleaseDatasetArr[i + 2] = "waiting";
@@ -66,8 +66,7 @@ function loopLendlease(i: number) {
         lendleaseDatasetArr[i + 2] = "back";
         break;
       }
-      print("[accent]랜드리스 접근중[]: ");
-      //print("@lendlease-moving");
+      localePrint("lendlease-moving");
       print`${Math.floor(Math.len(unit.x - x, unit.y - y))}km`;
       marker.flushText({ fetch: true });
 
@@ -97,15 +96,14 @@ function loopLendlease(i: number) {
       const second = Math.floor(((lastTimeToDelay / 1000) % 60) * 100) / 100;
       const minute = Math.floor((lastTimeToDelay / (1000 * 60)) % 60);
 
-      print("다음 랜드리스까지: ");
-      //print("@lendlease-waiting");
+      localePrint("lendlease-waiting");
       print`[accent]${minute}:${second}[]`;
       marker.flushText({ fetch: true });
 
       if (lastTimeToDelay < 0) {
         const unitTypeId = lendleaseDatasetArr[i + 1];
         const unit = spawnUnit({ x: originX, y: originY, type: lookup.unit(unitTypeId), team: Teams.derelict });
-        setProp(unit).speed = 2.5;
+        setProp(unit).speed = 18.75;
         setProp(unit).health = 200;
         lendleaseDatasetArr[i] = unit;
         lendleaseDatasetArr[i + 2] = "moving";

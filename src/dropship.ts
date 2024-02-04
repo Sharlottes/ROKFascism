@@ -75,11 +75,11 @@ function loopDropship(i: number) {
       y: fromY,
       team: Teams.crux,
     });
-    setProp(unit).speed = 1.5;
+    setProp(unit).speed = 11.25;
     datasetArray[i] = unit;
     return;
   } else if (unit.health <= 0) {
-    marker.visible = false;
+    marker.world = false;
     return;
   }
 

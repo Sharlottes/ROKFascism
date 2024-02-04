@@ -30,7 +30,6 @@ function update() {
 
   marker.pos = { x: cameraX, y: cameraY + cameraHeight / 2.5 };
 
-  //print("@missile-timer");
   localePrint("missile-timer");
   print`[accent]${minute}:${second}.${decisec} []`;
   marker.flushText({ fetch: false });

@@ -28,7 +28,7 @@ function fire(fromX: number, fromY: number, toX: number, toY: number) {
   setProp(mega).health = 0;
   if (!missile) return;
   const dist = Math.len(fromX - toX, fromY - toY);
-  setProp(missile).speed = (dist * 8) / (60 * 4);
+  setProp(missile).speed = dist * 0.25;
   setProp(missile).x = fromX;
   setProp(missile).y = fromY;
   setProp(missile).rotation = deg;
@@ -69,19 +69,12 @@ function getMissileType() {
 }
 
 function intro() {
-  //print("@intro-one");
-  print`반갑습니다 지휘관님.
-북의 기습적인 공격으로 전국적인 피해가 발생했습니다.
-이에 따라 지휘관님이 군과 행정에 이은 전권을 모두 지니게 되었습니다.
-이 사태에 대한 주변국의 도움을 받는걸 기대하긴 어렵습니다. 즉시 국토를 수복하고 반격에 나섭시오.`;
+  localePrint("intro-one");
   flushMessage.toast(10);
   printFlush();
   wait(11);
   setFlag("start-quest-processor", true);
-  //print("@intro-two");
-  print`북한의 다연장 탄두 미사일 공격은 매우 치명적이지만 그 주기가 짧지 않습니다.
-미사일의 발사 지점은 개성인 것으로 파악됩니다.
-미사일이 남은 기지를 마저 파괴시키기 전에 가능한 빨리 개성을 공격해야 합니다!`;
+  localePrint("intro-two");
   flushMessage.toast(10);
   printFlush();
   wait(11);

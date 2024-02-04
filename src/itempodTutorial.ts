@@ -1,4 +1,4 @@
-import { Marker, getBlock } from "mlogjs:world";
+import { Marker, getBlock, localePrint } from "mlogjs:world";
 
 const marker1 = Marker.shapeText({
   id: 31,
@@ -25,24 +25,18 @@ marker1.fontSize = 0.7;
 marker2.fontSize = 0.7;
 marker3.fontSize = 0.7;
 
-//print("@itempos-tutorial");
-print`[lightgray]전쟁의 혼란으로 군수물자가 전국 곳곳에 퍼져있습니다.
-이 아이템포드에 달린 언로더로 [accent]자원을 빠르게 확보[]하세요.[]`;
+localePrint("itempos-tutorial");
 marker1.flushText({ fetch: true });
-//print("@itempos-tutorial");
-print`[lightgray]전쟁의 혼란으로 군수물자가 전국 곳곳에 퍼져있습니다.
-이 아이템포드에 달린 언로더로 [accent]자원을 빠르게 확보[]하세요.[]`;
+localePrint("itempos-tutorial");
 marker2.flushText({ fetch: true });
-//print("@itempos-tutorial");
-print`[lightgray]전쟁의 혼란으로 군수물자가 전국 곳곳에 퍼져있습니다.
-이 아이템포드에 달린 언로더로 [accent]자원을 빠르게 확보[]하세요.[]`;
+localePrint("itempos-tutorial");
 marker3.flushText({ fetch: true });
 
 while (true) {
   const itemPod1 = getBlock.building(642, 385);
-  if (itemPod1 == undefined) marker1.visible = false;
+  if (itemPod1 == undefined) marker1.world = false;
   const itemPod2 = getBlock.building(641, 357);
-  if (itemPod2 == undefined) marker2.visible = false;
+  if (itemPod2 == undefined) marker2.world = false;
   const itemPod3 = getBlock.building(653, 376);
-  if (itemPod3 == undefined) marker3.visible = false;
+  if (itemPod3 == undefined) marker3.world = false;
 }
