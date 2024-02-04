@@ -43,10 +43,12 @@ function missileRaid() {
 
   const coreAmount = fetch.coreCount(Teams.sharded);
   const missileAmount = Math.min(3 * coreAmount, 15);
-  for (let i = 0; i < missileAmount; i++) {
-    const core = fetch.core(Teams.sharded, i % coreAmount);
-    fire(originX, originY, core.x, core.y);
-    wait(0.1);
+  for (let i = 0; i < coreAmount; i++) {
+    const core = fetch.core(Teams.sharded, i);
+    for (let _ = 0, m = Math.max(Math.idiv(missileAmount, coreAmount), 1); _ < m; _++) {
+      fire(originX, originY, core.x, core.y);
+      wait(0.1);
+    }
   }
 }
 
