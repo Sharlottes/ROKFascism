@@ -1,4 +1,4 @@
-import { Marker, effect, setProp, spawnUnit } from "mlogjs:world";
+import { Marker, effect, localePrint, setProp, spawnUnit } from "mlogjs:world";
 
 type State = "idle" | "moving" | "landing" | "back" | "waiting";
 
@@ -85,7 +85,8 @@ function loopDropship(i: number) {
 
   switch (state) {
     case "moving": {
-      print`적 공수부대 접근중: ${Math.floor(Math.len(unit.x - toX, unit.y - toY))}km`;
+      localePrint("dropship.incomming");
+      print`${Math.floor(Math.len(unit.x - toX, unit.y - toY))}km`;
       marker.flushText({ fetch: true });
 
       unitBind(unit);
@@ -95,7 +96,7 @@ function loopDropship(i: number) {
       break;
     }
     case "landing": {
-      print`적 공수부대 도착!`;
+      localePrint("dropship.arrived");
       marker.flushText({ fetch: true });
       const index = (totalLoadoutCount - loadoutAmount) * 2;
       for (let j = index; j < index + loadoutAmount * 2; j += 2) {
@@ -132,7 +133,8 @@ function loopDropship(i: number) {
       const second = Math.floor(((lastTimeToDelay / 1000) % 60) * 100) / 100;
       const minute = Math.floor((lastTimeToDelay / (1000 * 60)) % 60);
 
-      print`다음 공수까지: [accent]${minute}:${second}[]`;
+      localePrint("dropship.next");
+      print`[accent]${minute}:${second}[]`;
       marker.flushText({ fetch: true });
 
       if (lastTimeToDelay < 0) {

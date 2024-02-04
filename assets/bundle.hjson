@@ -11,7 +11,10 @@ lendlease-idle = Waiting to receive landout signal...
 lendlease-moving = [accent]The lendlease is incomming[]:  
 lendlease-waiting = next lendlease is incomming in 
 
-dropship-incomming = [red]Enemy airborne forces approaching![]
+dropship.incomming = [red]Enemy airborne forces approaching: []
+dropship.arrived = Enemy airborne forces arrive!
+dropship.next = Until next airborne forces: 
+
 
 itempos-tutorial = [lightgray]In the chaos of war, munitions are scattered across the country.\nyou can [accent]get resources[] via unloader or yourself.
 
@@ -37,7 +40,9 @@ lendlease-idle = 랜드리스 신호 수신 대기중...
 lendlease-moving = [accent]랜드리스 접근중[]: 
 lendlease-waiting = 다음 랜드리스까지: 
 
-dropship-incomming = [red]적 공수부대 접근중![]
+dropship.incomming = [red]적 공수부대 접근중![]
+dropship.arrived = 적 공수부대 도착!
+dropship.next = 다음 공수까지: 
 
 itempos-tutorial = [lightgray]전쟁의 혼란으로 군수물자가 전국 곳곳에 퍼져있습니다.\n이 아이템포드에 달린 언로더로 [accent]자원을 빠르게 확보[]하세요.[]
 
