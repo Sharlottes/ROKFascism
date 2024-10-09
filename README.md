@@ -30,8 +30,5 @@ git switch mindustry-v147-features
 pnpm install
 pnpm -C compiler build
 cd ..
-pnpm install ./local_mlogjs/compiler
-
-# run mlogjs
-pnpm exec mlogjs file --watch
+yarn install ./local_mlogjs/compiler
 ```

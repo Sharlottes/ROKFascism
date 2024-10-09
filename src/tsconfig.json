@@ -8,6 +8,6 @@
     }
   },
   "extends": "../tsconfig.json",
-  "include": ["../lib", "*.js", "*.ts"],
+  "include": ["../lib/**/*.d.ts", "*.js", "**/*.ts"],
   "exclude": ["../node_modules"]
 }

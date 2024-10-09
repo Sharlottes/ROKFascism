@@ -47,9 +47,6 @@ function loopLendlease(i: number) {
   const marker = Marker.of(markerId);
   const valut = getBlock.building(x, y);
   const isValid = valut != undefined && valut.type == Blocks.vault;
-  if (!isValid) {
-    lendleaseDatasetArr[i + 2] = "idle";
-  }
 
   // control unit
   switch (state) {
@@ -77,6 +74,11 @@ function loopLendlease(i: number) {
       break;
     }
     case "landing": {
+      if (!isValid) {
+        lendleaseDatasetArr[i + 2] = "back";
+        break;
+      }
+
       givelendlease(unit, valut);
       lendleaseDatasetArr[i + 2] = "back";
       lendleaseDatasetArr[i + 4] = Vars.time;
@@ -92,6 +94,11 @@ function loopLendlease(i: number) {
       }
     }
     case "waiting": {
+      if (!isValid) {
+        lendleaseDatasetArr[i + 2] = "idle";
+        break;
+      }
+
       const lastTimeToDelay = delay - (Vars.time - lastTime);
       const second = Math.floor(((lastTimeToDelay / 1000) % 60) * 100) / 100;
       const minute = Math.floor((lastTimeToDelay / (1000 * 60)) % 60);
@@ -152,21 +159,21 @@ setupLendlease({
   y: 365,
   unitType: Units.quad,
   delay: 50 * 1000,
-  markerId: 18,
+  markerId: 19,
 });
 setupLendlease({
   x: 456,
   y: 334,
   unitType: Units.quad,
   delay: 40 * 1000,
-  markerId: 19,
+  markerId: 20,
 });
 setupLendlease({
   x: 469,
   y: 507,
   unitType: Units.quad,
   delay: 30 * 1000,
-  markerId: 20,
+  markerId: 21,
 });
 while (true) {
   for (let i = 0; i < lendleaseDatasetArr.length; i += ITEMS_PER_ARR) {

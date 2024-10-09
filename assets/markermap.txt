@@ -1,7 +1,9 @@
-[0, 18): restoration marker  
-[18, 30): lendlease marker  
+[0, 19): restoration marker  
+[19, 30): lendlease marker  
 [30, 50): tutorials
   - 30: lendlease tutorial
   - 31,32,33: itempod tutorial
 [50, 70): dropship marker  
 70: event missile marker
+[71, 100):apply-alias marker
+[100, 238):core defenders marker
